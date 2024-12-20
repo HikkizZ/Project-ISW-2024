@@ -7,21 +7,25 @@ import Register from '@pages/Register';
 import Error404 from '@pages/Error404';
 import Root from '@pages/Root';
 import Resources from './pages/Resources';
-import Horario from '@pages/horario';
-import Period from '@pages/period';
+import Horario from '@pages/Horario';
+import Period from '@pages/Period';
 import Rooms from '@pages/Rooms';
 import Reservations from '@pages/Reservations';
 
 //import ProtectedRoute from '@components/ProtectedRoute';
 
 //import Hallam
-
 import ProtectedRoute from '@components/ProtectedRoute';
-//import '@styles/styles.css';
-import Foro from '@pages/Foro';
+import '@styles/styles.css';
+//import Hallam
+import Foro from '@pages/foro/Foro';
+import News from '@pages/News';
+import NewsId from '@pages/News.id'
+import ForoDetail from './pages/foro/ForoId';
 
 import Cursos from '@pages/Cursos';
 import Subjects from './pages/Subjects';
+import Calificar from './pages/Calificar';
 
 // Configuración de rutas con ProtectedRoute
 const router = createBrowserRouter([
@@ -33,7 +37,11 @@ const router = createBrowserRouter([
       // Ruta de Home: Todos pueden acceder
       {
         path: '/home',
-        element: <Home />
+        element: <News />
+      },
+      {
+        path: '/home/news/:id', //Ruta para las Noticias por Id
+        element: <NewsId />
       },
       // Rutas protegidas solo para admin
       {
@@ -43,21 +51,23 @@ const router = createBrowserRouter([
             <Users />
           </ProtectedRoute>
         ),
-    },
-    {
-      path: '/horario',
-      element: <Horario /> 
-    },
-    {
-      path: '/period',
-      element: <Period /> 
-    },
-    {
-        path: '/resources',
-        element: <Resources/>
+
       },
+      {
+        path: '/horario',
+        element: <Horario />
+      },
+      {
+        path: '/period',
+        element: <Period />
+      },
+      {
+
+      },
+
       // Recursos: Encargados y admin pueden ver, crear y modificar (sólo admin puede eliminar sala)
       {
+
         path: '/resources',
         element: (
           <ProtectedRoute allowedRoles={['Encargado', 'admin']}>
@@ -119,10 +129,20 @@ const router = createBrowserRouter([
         path: '/subjects',
         element: <Subjects />
       },
+      //foro paginas
       {
-        path: '/posts',
+        path: '/foro',
         element: <Foro />,
-      }
+      },
+      {
+        path: '/foro/:id',
+        element: <ForoDetail />,
+      },
+
+      {
+        path: '/calificar',
+        element: <Calificar />
+      },
     ]
   },
   {

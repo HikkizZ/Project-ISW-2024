@@ -7,9 +7,10 @@ import { useGetResources } from "../hooks/resources/useGetResources";
 import { useUpdateResource } from "../hooks/resources/useUpdateResource";
 import { useDeleteResource } from "../hooks/resources/useDeleteResource";
 import { useAuth } from "../context/AuthContext";
+import "../styles/around.css"; 
 
 export default function Resources() {
-    const { user } = useAuth(); // Accede al rol del usuario autenticado
+    const { user } = useAuth(); 
     const { resources, fetchResources, loading: loadingResources } = useGetResources();
     const { handleCreate, loading: loadingCreate } = useCreateResource(fetchResources);
     const { handleUpdate, loading: loadingUpdate } = useUpdateResource(fetchResources);
@@ -17,7 +18,7 @@ export default function Resources() {
         setResources: fetchResources,
     });
 
-    const [filteredResources, setFilteredResources] = useState([]); // Estado para recursos filtrados
+    const [filteredResources, setFilteredResources] = useState([]); 
     const [filters, setFilters] = useState({});
     const [showCreateModal, setShowCreateModal] = useState(false);
 
@@ -26,7 +27,6 @@ export default function Resources() {
     }, [fetchResources]);
 
     useEffect(() => {
-        // Aplicar filtros a los recursos globales
         let results = resources;
 
         if (filters.name) {
@@ -43,11 +43,10 @@ export default function Resources() {
             results = results.filter((resource) => resource.resourceType === filters.resourceType);
         }
 
-        setFilteredResources(results); // Actualizar el estado de recursos filtrados
+        setFilteredResources(results); 
     }, [filters, resources]);
 
     const handleSearch = (query) => {
-        // Aplicar búsqueda general sobre todos los recursos
         setFilteredResources(
             resources.filter((resource) =>
                 `${resource.name.toLowerCase()} ${resource.brand.toLowerCase()} ${resource.resourceType.toLowerCase()}`
@@ -57,7 +56,6 @@ export default function Resources() {
     };
 
     const handleFilterUpdate = (filter, value) => {
-        // Actualizar los filtros
         setFilters((prev) => ({
             ...prev,
             [filter]: value.trim(),
@@ -65,51 +63,48 @@ export default function Resources() {
     };
 
     const handleResetFilters = () => {
-        // Resetear filtros
         setFilters({});
         setFilteredResources(resources);
     };
 
     return (
-        <div>
-            <br />
-            <br />
-            <br />
-            <h1 style={{ textAlign: "center" }}>Recursos</h1>
+        <div className="around-container">
+        {/* Título principal centrado */}
+        <div style={{ display: "flex", justifyContent: "center", marginBottom: "20px" }}>
+            <h1 className="around-header">
+                <br />
+                <br />
+                Recursos</h1>
+        </div>
 
             {/* Buscar Recurso */}
-            <h3>Buscar Recurso</h3>
-            <ResourceSearch
-                onSearch={handleSearch} // Búsqueda general
-                onFilterUpdate={handleFilterUpdate} // Filtros específicos
-                onReset={handleResetFilters} // Resetear filtros
-                loading={loadingResources}
-            />
+            <div className="around-section">
+                <h3 className="around-subtitle">Buscar Recurso</h3>
+                <ResourceSearch
+                    onSearch={handleSearch}
+                    onFilterUpdate={handleFilterUpdate} 
+                    onReset={handleResetFilters} 
+                    loading={loadingResources}
+                />
+            </div>
 
             {/* Lista de Recursos */}
             <div style={{ display: "flex", justifyContent: "space-between", marginTop: "20px" }}>
                 <h3>Lista de Recursos</h3>
-                {["admin", "Encargado"].includes(user?.role) && ( // Solo el admin puede ver el botón de crear
-                    <button
-                        onClick={() => setShowCreateModal(true)}
-                        style={{
-                            height: "38px",
-                            backgroundColor: "#28a745",
-                            color: "#fff",
-                            border: "none",
-                            borderRadius: "5px",
-                            padding: "10px 15px",
-                            cursor: "pointer",
-                            fontSize: "14px",
-                        }}
-                    >
-                        Crear Recurso
-                    </button>
+                {["admin", "Encargado"].includes(user?.role) && (
+                    <div className="create-button-container">
+                        <button
+                            onClick={() => setShowCreateModal(true)}
+                            className="create-button"
+                        >
+                            Crear Recurso
+                        </button>
+                    </div>
                 )}
             </div>
 
             <ResourceTable
-                resources={filteredResources.length ? filteredResources : resources} // Mostrar recursos filtrados o todos
+                resources={filteredResources.length ? filteredResources : resources} 
                 onUpdate={["admin", "Encargado"].includes(user?.role) ? handleUpdate : null}
                 onDelete={user?.role === "admin" ? handleDelete : null}
                 loadingUpdate={loadingUpdate}
