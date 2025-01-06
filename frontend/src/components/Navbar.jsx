@@ -47,6 +47,7 @@ const Navbar = () => {
         { path: '/horario', name: 'Horario' },
         { path: '/resources', name: 'Recursos' },
         { path: '/reservations', name: 'Reservas' },
+        { path: '/rooms', name: 'Salas' },
         { path: '/cursos', name: 'Cursos' },
         { path: '/subjects', name: 'Asignaturas' },
         { path: '/foro', name: 'Foro' },

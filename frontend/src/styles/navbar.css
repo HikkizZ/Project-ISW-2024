@@ -3,21 +3,27 @@
 	width: 100%;
 	top: 0;
 	left: 0;
-	display: block;
-	background-color: #003366; /*Color de la navbar*/
+	display: flex; /*Cambié block a flex (flexible) para alinear elementos horizontalmente*/
+	justify-content: center; /*Agregué para centrar los enlaces horizontalmente*/
+	align-items: center; /*Agregué para alinear los enlaces verticalmente*/
+	background-color: #003366; 
 	height: 9vh;
-	z-index: 1000;
+	z-index: 1000; 
+	padding: 0 20px; /*Agregué este espaciado interno para evitar que los enlaces queden pegados*/
+	overflow-x: auto; /*Agregué para permitir scroll horizontal si no hay suficiente espacio*/
 	ul {
 		display: flex;
-		justify-content:end;
+		justify-content: center; /*Lo cambié a una alineación centrada de los enlaces*/
 		align-items: center;
-		padding: 0 5vw;
+		padding: 0; /*Eliminé padding extra para maximizar el espacio*/
 		margin: 0;
 		height: 100%;
+		flex-wrap: wrap; /*Agregué para permitir que los enlaces se reacomoden en múltiples líneas si es necesario*/
+		gap: 10px; /*Agregué para un espaciado entre enlaces*/
 		li {
 			display: flex;
 			align-items: center;
-			padding: 0 60px;
+			padding: 0 20px; /*Cambié/Reducí el padding para acomodar más enlaces*/
 			position: relative;
 			height: 100%;
 			a {
@@ -29,6 +35,7 @@
 				transition: border-color 0.3s ease;
 				padding: 0 10px 3px 10px;
 				box-sizing: border-box;
+				white-space: nowrap; /*Agregue para evitar que los textos se dividan en varias líneas*/
 			}
 			:not(.active)::before {
 				content: "";
