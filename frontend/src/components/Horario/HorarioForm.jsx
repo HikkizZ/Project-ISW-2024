@@ -77,7 +77,7 @@ export default function HorarioForm({ onCreate, loading }) {
         const rutExist = teachers.some((teacher) => teacher.rut === teacherId);
         if (!rutExist) return showErrorAlert("El rut ingresado no es encontrado");
 
-        const cursoExist = cursos.some((curso) => curso.code === cursoId);
+        const cursoExist = cursos.some((curso) => curso.cursos.code === cursoId);
         if (!cursoExist) return showErrorAlert("El Code del Curso ingresado no es encontrado");
 
         const roomExist = rooms.some((room) => room.name === classroomId);
@@ -109,6 +109,7 @@ export default function HorarioForm({ onCreate, loading }) {
         setHorarioData({ ...horarioData, teacherId: formatted });
     };*/
 
+    console.log(cursos.cursos, cursos)
     return (
         <div>
             {!showForm ? (
@@ -126,7 +127,7 @@ export default function HorarioForm({ onCreate, loading }) {
                         disabled={loading}
                     />
                     <datalist id="cursos">
-                        {cursos.map((curso) => (
+                        {cursos.cursos.map((curso) => (
                             <option key={curso.id} value={curso.code} />
                         ))}
                     </datalist>
