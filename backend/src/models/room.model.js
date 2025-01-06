@@ -26,7 +26,6 @@ const RoomSchema = new EntitySchema({
             nullable: false,
         },
     },
-
     relations:{
         horarios: { // Relación con Horario
             target: "Horario", 

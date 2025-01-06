@@ -1,11 +1,11 @@
 import { useState, useEffect } from "react";
 import { getPeriods } from "@services/period.service"; // Servicio para obtener períodos
-import { getCursos } from "@services/curso.service"
+//import { getCursos } from "@services/curso.service"
 import { showErrorAlert } from "../../helpers/sweetAlert"
 
 export default function HorarioBox({ horarios }) {
     const [periods, setPeriods] = useState([]); // Almacena los períodos
-    const [cursos,setCursos] = useState([]) //Almacena los curso
+//    const [cursos,setCursos] = useState([]) //Almacena los curso
     const [filterType, setFilterType] = useState(""); // Tipo de filtro: "curso" o "profesor"
     const [filterValue, setFilterValue] = useState(""); // Valor seleccionado para el filtro
 
@@ -28,7 +28,7 @@ export default function HorarioBox({ horarios }) {
     }, []);
 
     //Obtiene los cursos de la base de datos
-    useEffect(() => {
+/*    useEffect(() => {
         const fetchCursos = async () => {
             try {
                 const cursosData = await getCursos();
@@ -43,7 +43,7 @@ export default function HorarioBox({ horarios }) {
             }
         };
         fetchCursos();
-    }, [])
+    }, [])*/
 
     // Filtrar horarios en base al filtro seleccionado
     const filteredHorarios = horarios.filter((f) => {
@@ -66,15 +66,15 @@ export default function HorarioBox({ horarios }) {
 
 
         return(
-            <div style={{ margin: "20px 0" }}>
-            <h2 style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+            <div>
+            <h2>
 
 
-                <div style={{ display: "flex", gap: "30px" }}>
+                <div>
                     <select
                         value={filterType}
                         onChange={(e) => setFilterType(e.target.value)}
-                        style={{ height: "38px", borderRadius: "5px", padding: "5px" }}
+                        
                     >
                         <option value="">-- Filtrar por --</option>
                         <option value="curso">Curso</option>
@@ -85,7 +85,7 @@ export default function HorarioBox({ horarios }) {
                         placeholder={`Buscar ${filterType}`}
                         value={filterValue}
                         onChange={(e) => setFilterValue(e.target.value)}
-                        style={{ height: "38px", borderRadius: "5px", padding: "5px" }}
+                        
                     />
                     )}
                 </div>
@@ -93,11 +93,7 @@ export default function HorarioBox({ horarios }) {
 
             <table
                     border="1"
-                    style={{
-                        width: "100%",
-                        textAlign: "center",
-                        borderCollapse: "collapse",
-            }}
+                    
             >
                 <thead>
                     <tr>

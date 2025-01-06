@@ -12,9 +12,8 @@ import Period from '@pages/Period';
 import Rooms from '@pages/Rooms';
 import Reservations from '@pages/Reservations';
 
-
 //import ProtectedRoute from '@components/ProtectedRoute';
-//import '@styles/styles.css';
+
 //import Hallam
 import ProtectedRoute from '@components/ProtectedRoute';
 import '@styles/styles.css';
