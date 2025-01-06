@@ -14,8 +14,8 @@ const router = Router();
 router.use(authenticateJWT);
 
 router
-    .get("/", verifyRole(["admin", "Profesor"]), getHorario) // Obtener un horario específico.
-    .get("/all", verifyRole(["admin", "Profesor"]), getHorarios) // Listar todos los horarios.
+    .get("/", verifyRole(["admin", "profesor"]), getHorario) // Obtener un horario específico.
+    .get("/all", verifyRole(["admin", "profesor"]), getHorarios) // Listar todos los horarios.
     .post("/", verifyRole("admin"), createHorario) // Crear un horario (solo para administradores).
     .patch("/", verifyRole("admin"), updateHorario) // Actualizar un horario (solo para administradores).
     .delete("/", verifyRole("admin"), deleteHorario); // Eliminar un horario (solo para administradores).
