@@ -1,6 +1,6 @@
 import axios from '@services/root.service.js';
 
-const API_URL = 'http://146.83.198.35:1333';
+const API_URL = 'http://146.83.198.35:1332';
 
 export const createNews = async (newsData) => {
   try {
