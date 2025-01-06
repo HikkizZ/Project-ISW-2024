@@ -77,7 +77,7 @@ export default function HorarioForm({ onCreate, loading }) {
         const rutExist = teachers.some((teacher) => teacher.rut === teacherId);
         if (!rutExist) return showErrorAlert("El rut ingresado no es encontrado");
 
-        const cursoExist = cursos.some((curso) => curso.cursos.code === cursoId);
+        const cursoExist = cursos.cursos.some((curso) => curso.code === cursoId);
         if (!cursoExist) return showErrorAlert("El Code del Curso ingresado no es encontrado");
 
         const roomExist = rooms.some((room) => room.name === classroomId);
